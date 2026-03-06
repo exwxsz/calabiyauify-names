@@ -295,7 +295,14 @@ function calculate(){
       </div>
 
       <div class="w-full max-w-md mt-6 bg-white/80 dark:bg-gray-800/90 backdrop-blur-md rounded-3xl p-6 shadow-2xl border border-white/50 dark:border-gray-700 text-center space-y-4">
-
+        <div class="flex flex-col items-center space-y-3">
+          <div class="relative">
+               <img
+                src = "/favicon.ico"
+                class="w-16 h-16 object-contain drop-shadow-md animate-bounce-slow cursor-pointer"
+              />
+             <div class="absolute -top-1 -right-1 w-4 h-4 bg-pink-400 rounded-full border-2 border-white"></div>
+          </div></div>
         <h2 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-indigo-600 dark:from-pink-400 dark:to-indigo-300">
           每日喵言喵语
         </h2>
