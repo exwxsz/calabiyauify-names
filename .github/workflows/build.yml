@@ -24,6 +24,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+    
+      - name: Set short commit SHA
+        run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
 
       - name: Set build date
         run: echo "BUILD_DATE=$(date +'%Y%m%d')" >> $GITHUB_ENV
@@ -32,15 +35,15 @@ jobs:
         run: npm run build
 
       - name: Zip build
-        run: zip -r calabiyauify-names-${{ env.BUILD_DATE }}-git-commit-${{ github.sha }}.zip dist
+        run: zip -r calabiyauify-names-${{ env.BUILD_DATE }}-git-commit-${{ env.SHORT_SHA }}.zip dist
 
       # 创建 Release
       - name: Create Release and Upload
         uses: softprops/action-gh-release@v2
         with:
             tag_name: build-${{ env.BUILD_DATE }}-${{ github.sha }}
-            name: calabiyauify-names-${{ env.BUILD_DATE }}-git-commit-${{ github.sha }}.zip
-            files: calabiyauify-names-${{ env.BUILD_DATE }}-git-commit-${{ github.sha }}.zip
+            name: calabiyauify-names-${{ env.BUILD_DATE }}-git-commit-${{ env.SHORT_SHA }}.zip
+            files: calabiyauify-names-${{ env.BUILD_DATE }}-git-commit-${{ env.SHORT_SHA }}.zip
             overwrite_files: true
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
