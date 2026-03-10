@@ -1,0 +1,60 @@
+name: Build and Release Project
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Set build date
+        run: echo "BUILD_DATE=$(date +'%Y%m%d')" >> $GITHUB_ENV
+
+      - name: Build project
+        run: npm run build
+
+      - name: Zip build
+        run: zip -r calabiyauify-names-${{ env.BUILD_DATE }}-git-commit-${{ github.sha }}.zip dist
+
+      # 创建 Release
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: build-${{ env.BUILD_DATE }}-${{ github.sha }}
+          release_name: Build ${{ env.BUILD_DATE }}-${{ github.sha }}
+          draft: false
+          prerelease: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # 上传 build 到 Release
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-${{ env.BUILD_DATE }}-${{ github.sha }}
+          files: calabiyauify-names-${{ env.BUILD_DATE }}-git-commit-${{ github.sha }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # 上传 Artifact（可选，Actions 页面下载）
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: calabiyauify-names-${{ env.BUILD_DATE }}-${{ github.sha }}
+          path: dist
