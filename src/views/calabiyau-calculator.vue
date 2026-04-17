@@ -59,7 +59,7 @@ function calculate(){
         if(normalizedName.includes(key.toLowerCase())){
           score.value = 100;
           comment.value = "检测到强烈卡丘共振！你就是超绝可爱大卡奴喵！！";
-          pic.value="/mi3.png";
+          pic.value="./mi3.png";
           return;
         }
       }
@@ -133,52 +133,52 @@ function calculate(){
 
     if(score.value < 10){
         comment.value = "不太像是卡丘猫娘喵~";
-        pic.value = '/aika1.png';
+        pic.value = './aika1.png';
     }
     else if(score.value < 20){
         comment.value = "猫娘程度很低喵，还需要修炼喵~";
-        pic.value = "/cele1.png";
+        pic.value = "./cele1.png";
     }
     else if(score.value < 30){
         comment.value = "喵化进程 30%，尾巴在偷偷出现喵！";
-        pic.value = "/aika2.png";
+        pic.value = "./aika2.png";
     }
     else if(score.value < 40){
         comment.value = "已经开始弦化进程了喵，耳朵已经可以竖起来了喵！";
-        pic.value = "/aika5.png";
+        pic.value = "./aika5.png";
     }
     else if(score.value < 50){
         comment.value = "半喵化状态，萌态渐显喵~";
-        pic.value = "/aika4.png";
+        pic.value = "./aika4.png";
     }
     else if(score.value < 60){
         comment.value = "猫娘指数过半了喵，魅力值飙升喵！";
-        pic.value = "/mi4.png";
+        pic.value = "./mi4.png";
     }
     else if(score.value < 70){
         comment.value = "高浓度卡拉彼丘适配者！来自火力大喵的肯定喵！";
-        pic.value = "/mi2.png";
+        pic.value = "./mi2.png";
     }
     else if(score.value < 80){
         comment.value = "几乎完成猫娘化，闪闪发光的喵！";
-        pic.value = "/aika3.png";
+        pic.value = "./aika3.png";
     }
     else if(score.value < 90){
         comment.value = "猫娘指数超过80%了喵！完美喵化，魅力爆表了喵！";
-        pic.value = "/mi5.png";
+        pic.value = "./mi5.png";
     }
     else{
         comment.value = "完全弦化成功！已经变成顶级卡丘猫娘喵！";
-        pic.value = "/xnm1.png";
+        pic.value = "./xnm1.png";
     }
   }
     // 图片+音效组合数组
     const effects = [
-      { img: '/death.png', audio: '/death.mp3' },
-      { img: '/win.png', audio: '/win.mp3' },
+      { img: './death.png', audio: './death.mp3' },
+      { img: './win.png', audio: './win.mp3' },
     ]
 
-    const originalImg = '/title.png'
+    const originalImg = './title.png'
     const currentImg = ref(originalImg)
 
     function handleClick() {
